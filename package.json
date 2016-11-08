@@ -1,0 +1,46 @@
+{
+  "name": "react-native-unlock",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": {
+    "url": "https://github.com/leecade/react-native-unlock.git",
+    "type": "git"
+  },
+  "author": "leecade <leecade@163.com>",
+  "license": "MIT",
+  "scripts": {
+    "test": "npm run lint",
+    "lint": "standard | snazzy",
+    "update": "updtr",
+    "precommit": "git diff --name-only --cached --relative | grep '\\.jsx\\?$' | xargs standard | snazzy; if [ $? -ne 0 ]; then exit 1; fi"
+  },
+  "pre-commit": {
+    "run": [
+      "precommit"
+    ],
+    "silent": true
+  },
+  "standard": {
+    "parser": "babel-eslint",
+    "global": [
+      "__DEV__",
+      "FormData",
+      "requestAnimationFrame",
+      "alert",
+      "setImmediate",
+      "fetch"
+    ],
+    "ignore": [
+      "node_modules/"
+    ]
+  },
+  "devDependencies": {
+    "babel-eslint": "^7.1.0",
+    "enzyme": "^2.5.1",
+    "pre-commit": "^1.1.3",
+    "snazzy": "^5.0.0",
+    "standard": "^8.5.0",
+    "updtr": "^0.2.2"
+  },
+  "dependencies": {}
+}
