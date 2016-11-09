@@ -197,6 +197,34 @@ test('Check others branches', async t => {
   t.is(wrapper.node.resetTimer[0], null)
   wrapper.node.onPanResponderRelease()
   t.is(wrapper.node.resetTimer[0], undefined)
+  wrapper.node.componentWillMount()
+
+  const mockEvent = {
+    nativeEvent: {
+      changedTouches: [{
+        locationX: 15,
+        locationY: 15
+      }],
+      touches: [{
+        locationX: 15,
+        locationY: 15
+      }]
+    },
+    touchHistory: {
+      numberActiveTouches: [{
+        locationX: 15,
+        locationY: 15
+      }],
+      touchBank: [{
+        locationX: 15,
+        locationY: 15
+      }]
+    }
+  }
+  const panHandlers = wrapper.node.panResponder.panHandlers
+  t.true(panHandlers.onStartShouldSetResponder(mockEvent))
+  t.true(panHandlers.onStartShouldSetResponderCapture(mockEvent))
+  t.true(panHandlers.onMoveShouldSetResponder(mockEvent))
 
   const wrapper2 = mount(<Unlock interactive='SUCCESS' width={100} gapSize={10} outerProps={{
     strokeWidth: 10
