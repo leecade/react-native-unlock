@@ -9,7 +9,7 @@
   "author": "leecade <leecade@163.com>",
   "license": "MIT",
   "scripts": {
-    "test": "npm run lint && ava",
+    "test": "npm run lint && nyc --all ava",
     "test:watch": "ava --watch",
     "coverage": "nyc ava",
     "coverage:report": "nyc report --reporter=text-lcov | coveralls",
@@ -23,6 +23,9 @@
     ],
     "silent": true
   },
+  "files": [
+    "src"
+  ],
   "standard": {
     "parser": "babel-eslint",
     "global": [
