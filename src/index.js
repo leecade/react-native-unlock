@@ -239,7 +239,7 @@ export default class extends PureComponent {
     // circleRadius: 50,
     mode: 'gesture',
     interactive: 'READY',
-    strokeWidth: 10,
+    strokeWidth: 1,
     // stroke: '#000',
     // gapSize: 30,
     maxLength: 10,
@@ -267,20 +267,20 @@ export default class extends PureComponent {
     this.locationX = 0
     this.locationY = 0
   }
-  layoutHandle = ({ nativeEvent }) => {
+  // layoutHandle = ({ nativeEvent }) => {
     // this.setState({layoutBug: nativeEvent.layout})
-  }
-  throttle = (fn, delay = 50) => {
-    let timer = null
-    return () => {
-      const context = this
-      const args = arguments
-      clearTimeout(timer)
-      timer = setTimeout(() => {
-        fn.apply(context, args)
-      }, delay)
-    }
-  }
+  // }
+  // throttle = (fn, delay = 50) => {
+  //   let timer = null
+  //   return () => {
+  //     const context = this
+  //     const args = arguments
+  //     clearTimeout(timer)
+  //     timer = setTimeout(() => {
+  //       fn.apply(context, args)
+  //     }, delay)
+  //   }
+  // }
   onPanResponderGrant = async (e, gestureState) => {
     const { onGrant } = this.props
     const { locationX, locationY } = e.nativeEvent.changedTouches[0]
@@ -340,8 +340,9 @@ export default class extends PureComponent {
     const { styles, layout } = this.state
     const { radius, strokeWidth } = styles.outerProps
     const { gapSize, mode } = this.props
-    const size = radius || (((layout.width || width) - gapSize * 4) / 3 - strokeWidth) / 2
-    const gap = gapSize || ((layout.width || width) - ((size + strokeWidth) * 2 * 3)) / 4
+    const wrapWidth = this.props.width || layout.width || width
+    const size = ((wrapWidth - gapSize * 4) / 3 - strokeWidth) / 2 || radius
+    const gap = gapSize || (wrapWidth - ((size + strokeWidth) * 2 * 3)) / 4
     let list = []
     for (let i = 0; i < 9; i++) {
       let n = i
@@ -379,7 +380,7 @@ export default class extends PureComponent {
       }
     })
   }
-  resetStock = async () => new Promise(resolve => {
+  resetStock = () => new Promise(resolve => {
     this.setState({stock: []}, resolve)
     this.props.onReset && this.props.onReset(this)
   })
@@ -404,7 +405,7 @@ export default class extends PureComponent {
   render () {
     const { styles, layout, list, stock, textSize, locationX, locationY } = this.state
     const props = this.props
-    const linePath = Path()
+    const linePath = new Path()
     if (props.mode === 'gesture') {
       stock.map((n, i) => {
         const { x, y } = list[n]
@@ -421,7 +422,7 @@ export default class extends PureComponent {
     // 3. TODO: Still not smooth on Android if render too much elements
     return (<View style={styles.bg} {...this.panResponder.panHandlers}>
       <TEXT collapsable={false} ref='needle' style={{fontSize: 20, position: 'absolute', opacity: 0}}>0</TEXT>
-      <View ref='wrap' onLayout={this.layoutHandle} collapsable={false} style={[styles.wrap, props.style]}>
+      <View ref='wrap' collapsable={false} style={[styles.wrap, props.style]}>
         {
           !!(props.width || layout.width) && <Surface style={styles.surface} width={props.width || layout.width} height={props.height || layout.height}>
             {props.mode === 'gesture' && !props.clear && <Line d={linePath} {...styles.lineProps} {...(this.interactiveStyle('line'))} />}

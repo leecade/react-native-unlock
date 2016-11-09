@@ -1,0 +1,16 @@
+machine:
+  node:
+    version: 4
+dependencies:
+  pre:
+    - curl -o- -L https://yarnpkg.com/install.sh | bash
+  override:
+    - yarn
+test:
+  post:
+    - yarn coverage:report
+    - bash <(curl -s https://codecov.io/bash)
+# deployment:
+general:
+  artifacts:
+    - ".nyc_output"

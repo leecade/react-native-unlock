@@ -12,6 +12,7 @@
     "test": "npm run lint && ava",
     "test:watch": "ava --watch",
     "coverage": "nyc ava",
+    "coverage:report": "nyc report --reporter=text-lcov | coveralls",
     "lint": "standard | snazzy",
     "update": "updtr",
     "precommit": "git diff --name-only --cached --relative | grep '\\.jsx\\?$' | xargs standard | snazzy; if [ $? -ne 0 ]; then exit 1; fi"
@@ -78,6 +79,10 @@
       "src/**/*.js"
     ],
     "exclude": [],
+    "reporter": [
+      "lcov",
+      "text-summary"
+    ],
     "require": [
       "babel-core/register"
     ],

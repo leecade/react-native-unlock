@@ -1,4 +1,3 @@
-// import 'react-native-mock/mock'
 import mockery from 'mockery'
 import jsdom from 'jsdom'
 
