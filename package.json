@@ -58,7 +58,7 @@
     "react-native-mock": "^0.2.7",
     "snazzy": "^5.0.0",
     "standard": "^8.5.0",
-    "updtr": "^0.2.2"
+    "updtr": "^1.0.0"
   },
   "dependencies": {},
   "ava": {
