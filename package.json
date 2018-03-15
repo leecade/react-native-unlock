@@ -57,7 +57,7 @@
     "react-native": "^0.37.0",
     "react-native-mock": "^0.2.7",
     "snazzy": "^5.0.0",
-    "standard": "^8.5.0",
+    "standard": "^11.0.1",
     "updtr": "^0.2.2"
   },
   "dependencies": {},
