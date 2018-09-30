@@ -47,7 +47,7 @@
     "babel-preset-fe": "^1.0.16",
     "coveralls": "^2.11.14",
     "enzyme": "^2.5.1",
-    "jsdom": "^9.8.3",
+    "jsdom": "^12.1.0",
     "mockery": "^2.0.0",
     "nyc": "^8.4.0",
     "pre-commit": "^1.1.3",
